@@ -18,6 +18,8 @@ model User {
   id        String     @id @default(uuid())
   email     String     @unique
   password  String
+  nom       String
+  prenom    String
   role      Role       @default(COMPTABLE)
   isActive  Boolean    @default(true)
   createdAt DateTime   @default(now())
