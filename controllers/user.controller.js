@@ -115,8 +115,68 @@ class UserController {
   }
 
 
+  // DELETE /deleteUserById/:id' - Supprimer un utilisateur
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+
+      // Vérifier si l'utilisateur existe
+      const existing = await userService.getUserById(id);
+      if (!existing) {
+        return res.status(404).json({ error: 'Utilisateur introuvable' });
+      }
+
+      await userService.deleteUser(id);
+      
+      res.json({ message: 'Utilisateur supprimé avec succès' });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+ // PATCH /api/users/:id - Modifier un utilisateur c'est just pour un utilisateur simple comptable 
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+
+      // Vérifier si l'utilisateur existe
+      const existing = await userService.getUserById(id);
+      if (!existing) {
+        return res.status(404).json({ error: 'Utilisateur introuvable' });
+      }
+
+    
+
+      // Mettre à jour 
+      const user = await userService.updateUser(id, data);
+      
+      res.json({
+        message: 'Utilisateur modifié avec succès',
+        user
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
 
+
+  // PATCH /api/users/:id/toggle - Activer/Désactiver
+
+  async toggleActive(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await userService.toggleActive(id);
+       
+      res.json({
+        message: user.isActive ? 'Utilisateur activé' : 'Utilisateur désactivé',
+        user
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
 }
 

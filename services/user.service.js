@@ -88,8 +88,66 @@ class UserService {
     return user ;
   }
 
+// Supprimer un utilisateur
+  async deleteUser(id) {
+     const user = await prisma.user.delete({
+      where: { id }
+    });
+    return user ;
+  }
 
 
+
+ // Modifier un utilisateur
+  async updateUser(id, data) {
+    
+
+    return await prisma.user.update({
+      where: { id },
+      data: {
+        email: data.email,
+        nom: data.nom,
+        prenom: data.prenom,
+       
+      },
+      select: {
+        id: true,
+        email: true,
+        nom: true,
+        prenom: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true
+        // On ne retourne PAS le password
+      }
+    });
+  }
+
+
+  // Activer/Désactiver un utilisateur
+  async toggleActive(id) {
+    const user = await this.getUserById(id);
+     if (!user) {
+    throw new Error("Utilisateur non trouvé");
+  }
+    
+   const  userUpdate = await prisma.user.update({
+      where: { id },
+      data: { isActive: !user.isActive },
+      select: {
+        id: true,
+        email: true,
+        nom: true,
+        prenom: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true
+      }
+    });
+    return userUpdate
+  }
 
 
 
