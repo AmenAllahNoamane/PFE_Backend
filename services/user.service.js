@@ -90,6 +90,9 @@ class UserService {
 
 // Supprimer un utilisateur
   async deleteUser(id) {
+          // Empêcher l'admin de se supprimer lui-même
+
+
      const user = await prisma.user.delete({
       where: { id }
     });
@@ -100,6 +103,7 @@ class UserService {
 
  // Modifier un utilisateur
   async updateUser(id, data) {
+
     // Si on change le mot de passe, le hasher
 
     if (data.password) {

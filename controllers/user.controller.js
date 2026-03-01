@@ -53,19 +53,6 @@ class UserController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   // GET /api/users - Liste tous les utilisateurs
   async getAll(req, res) {
  try {
@@ -142,7 +129,7 @@ class UserController {
 }
 
  // PATCH /api/users/:id - Modifier un utilisateur c'est just pour un utilisateur simple comptable 
-  async update(req, res) {
+  async updateUserByAdmin(req, res) {
     try {
       const { id } = req.params;
       const data = req.body;
@@ -152,6 +139,13 @@ class UserController {
       if (!existing) {
         return res.status(404).json({ error: 'Utilisateur introuvable' });
       }
+
+            if (data.password && data.password.length < 6) {
+        return res.status(400).json({ 
+          error: 'Le mot de passe doit contenir au moins 6 caractères' 
+        });
+      }
+
 
     
 
@@ -197,7 +191,11 @@ class UserController {
   /////////////////////////////////////
   // profile Utilisateur connecté//
   ////////////////////////////////
+
+
 // GET /api/users/me
+
+
   async getMyProfile(req, res) {
     try {
       const userId = req.user.id; // récupéré depuis JWT
