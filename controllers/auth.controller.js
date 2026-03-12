@@ -15,6 +15,7 @@ class AuthController {
 
       // Appeler le service
       const result = await authService.login(email, password);
+     // console.log(result);
 
       res.json({
         message: 'Connexion réussie',

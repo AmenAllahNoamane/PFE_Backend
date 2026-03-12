@@ -41,6 +41,7 @@ class UserController {
         isActive
       });
       
+      
       res.status(201).json({
         message: 'Utilisateur créé avec succès',
         user  // Le password n'est PAS dans la réponse

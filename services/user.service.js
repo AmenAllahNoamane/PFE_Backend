@@ -18,7 +18,7 @@ class UserService {
         nom: data.nom,
         prenom: data.prenom,
         password: hashedPassword,  // ← Mot de passe hashé
-        isActive: data.isActive || true,
+        isActive: data.isActive ?? true,
         role: data.role || 'COMPTABLE'
       },
        select: {

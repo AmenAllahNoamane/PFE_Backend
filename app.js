@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http =require("http") // importation protocol web 
+const cors =require('cors')
 
 require("dotenv").config() //configuration . env
 
@@ -17,12 +18,22 @@ var app = express();
 const {testPostgresConnection } =require("./config/database")
 
 
+// configuration ll rabta bin back ou front 
+app.use(cors({
+  origin: 'http://localhost:5173',  // URL de ton frontend Vite
+  credentials: true,                 // Permet l'envoi de cookies/credentials
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 // Routes
 app.use('/auth', authRoutes);  // ← Nouvelle route
