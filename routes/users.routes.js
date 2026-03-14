@@ -29,7 +29,7 @@ router.get('/getUserById/:id', roleMiddleware('ADMIN', 'MANAGER'),userController
 //    Gestion utilisateurs (ADMIN uniquement)
 // POST - Créer un utilisateur (ADMIN uniquement)
 
-router.post('/addUser', roleMiddleware('ADMIN'),userController.create);
+router.post('/addUser', roleMiddleware('ADMIN'),userController.createUser);
 
 // PATCH - Modification des utilisateur ( Admin uniquement )
 router.patch('/updateUserByAdmin/:id', roleMiddleware('ADMIN'), userController.updateUserByAdmin);
@@ -41,7 +41,7 @@ router.patch('/toggle/:id',roleMiddleware('ADMIN'), userController.toggleActive)
 
 // DELETE - Supprimer un utilisateur (ADMIN uniquement)
 
-router.delete('/deleteUserById/:id', roleMiddleware('ADMIN'),userController.delete);
+router.delete('/deleteUserById/:id', roleMiddleware('ADMIN'),userController.deleteUserById);
 
 
 module.exports = router;

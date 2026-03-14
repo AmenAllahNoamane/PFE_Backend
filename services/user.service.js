@@ -38,7 +38,7 @@ class UserService {
 
 
     async getAllUsers() {
-        const allUsers =await prisma.user.findMany(
+        const users =await prisma.user.findMany(
             {
       select: {
         id: true,
@@ -54,7 +54,7 @@ class UserService {
       orderBy: { createdAt: 'desc' }
     });
         
-        return  allUsers
+        return  users
 
   }
 

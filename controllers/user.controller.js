@@ -5,7 +5,7 @@ const userService = require('../services/user.service');
 class UserController {
 
   // POST /api/users - Créer un utilisateur
-  async create(req, res) {
+  async createUser(req, res) {
     try {
       const { email, password, nom ,prenom ,isActive,  role } = req.body;
      
@@ -104,7 +104,7 @@ class UserController {
 
 
   // DELETE /deleteUserById/:id' - Supprimer un utilisateur
-  async delete(req, res) {
+  async deleteUserById(req, res) {
     try {
       const { id } = req.params;
             // Empêcher l'admin de se supprimer lui-même

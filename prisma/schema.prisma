@@ -35,3 +35,4 @@ enum Role {
   MANAGER
   COMPTABLE
 }
+
