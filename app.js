@@ -12,10 +12,12 @@ require("dotenv").config() //configuration . env
 var indexRouter = require('./routes/index');
 var authRoutes = require('./routes/auth.routes');
 var usersRouter = require('./routes/users.routes');
+var documentRoutes = require('./routes/document.routes');
 
 var app = express();
 
 const {testPostgresConnection } =require("./config/database")
+
 
 
 // configuration ll rabta bin back ou front 
@@ -41,6 +43,8 @@ app.use('/auth', authRoutes);  // ← Nouvelle route
 app.use('/', indexRouter);
 
 app.use('/users', usersRouter);
+
+app.use('/documents', documentRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
