@@ -15,7 +15,7 @@ class DocumentController {
         fileSize: req.file.size,
         uploadedBy: req.user.id
       };
-      console.log(req.file)
+      //console.log(req.file)
       
       const document = await documentService.createDocument(documentData);
       
@@ -59,9 +59,7 @@ class DocumentController {
     try {
       const documents = await documentService.getMyDocuments(req.user.id);
       
-      if(documents.length===0){
-         return res.status(200).json({ message: "Aucun document trouvé" });
-      }
+
       res.json(documents);
     } catch (error) {
       res.status(500).json({ error: error.message });

@@ -58,12 +58,13 @@ class UserController {
   async getAll(req, res) {
  try {
     const users = await userService.getAllUsers();
-    if (users.length === 0) {
-      return res.status(200).json({ message: "Aucun utilisateur trouvé" });
-    }
+    // if (users.length === 0) {
+    //   return res.status(200).json({ message: "Aucun utilisateur trouvé" });
+    // }
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  
   }
   }
 

@@ -6,8 +6,8 @@ class DocumentService {
 
 
 async createDocument(documentData) {
-    try {
-      const document = await prisma.document.create({
+    
+      const newDocument = await prisma.document.create({
         data: {
           ...documentData,
           statut: 'EN_COURS'
@@ -25,14 +25,14 @@ async createDocument(documentData) {
         }
       });
       
-      return document;
-    } catch (error) {
-      throw new Error(`Erreur création document: ${error.message}`);
-    }
+      return newDocument;
+    
   }
 
   async getAllDocuments() {
-    try {
+    
+    // pour tester le chargement 
+   // await new Promise(resolve => setTimeout(resolve, 5000));
       const documents = await prisma.document.findMany({
         include: {
           user: {
@@ -41,7 +41,8 @@ async createDocument(documentData) {
               nom: true,
               prenom: true,
               email: true,
-              role: true
+              role: true,
+             // fakeField: true
             }
           }
         },
@@ -51,9 +52,7 @@ async createDocument(documentData) {
       });
       
       return documents;
-    } catch (error) {
-      throw new Error(`Erreur récupération documents: ${error.message}`);
-    }
+   
   }
 
 
@@ -61,7 +60,9 @@ async createDocument(documentData) {
 
 
     async getMyDocuments(userId) {
-    try {
+    
+     // pour tester le chargement 
+     // await new Promise(resolve => setTimeout(resolve, 5000));
       const documents = await prisma.document.findMany({
         where: {   uploadedBy: userId},
         include: {
@@ -71,7 +72,8 @@ async createDocument(documentData) {
               nom: true,
               prenom: true,
               email: true,
-              role: true
+              role: true,
+              
             }
           }
         },
@@ -81,10 +83,8 @@ async createDocument(documentData) {
       });
       
       return documents;
-    } catch (error) {
-      throw new Error(`Erreur récupération mes documents: ${error.message}`);
-    }
-  }
+    } 
+  
   // document par id 
 
 async getDocumentById(id) {

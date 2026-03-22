@@ -29,7 +29,7 @@ router.post( '/upload',roleMiddleware('COMPTABLE', 'MANAGER', 'ADMIN'), (req, re
 
 router.get('/all',roleMiddleware( 'MANAGER', 'ADMIN'),documentController.getAllDocuments);
 
-router.get('/myDocuments',roleMiddleware( 'MANAGER', 'ADMIN'),documentController.getMyDocuments)
+router.get('/myDocuments',roleMiddleware( 'COMPTABLE','MANAGER', 'ADMIN'),documentController.getMyDocuments)
 
 router.get('/DocumentById/:id',roleMiddleware('COMPTABLE', 'MANAGER', 'ADMIN'),documentController.getById);
 
